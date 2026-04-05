@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: snacktopia-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/snacktopia
+    username: postgres
+    password: rrr100911
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+jwt:
+  secret: snacktopia-super-secret-key-2025-must-be-256-bits-minimum-for-hs256
+  expiration: 86400000
+
+cors:
+  allowed-origins:
+    - http://localhost:4200
+    - https://snacktopia.vercel.app
