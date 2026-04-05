@@ -1,0 +1,74 @@
+<!-- Hero / Banner -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <h1 class="hero__titulo">
+        Bienvenido a<br>
+        <span class="hero__marca">Snacktopia</span>
+      </h1>
+      <p class="hero__subtitulo">Explora los snacks más deliciosos y divertidos. ¡Envío a todo Lima!</p>
+      <div class="hero__btns">
+        <button class="btn-hero-primary" (click)="irOfertas()">Ver Ofertas 🔥</button>
+        <button class="btn-hero-outline" (click)="irProductos()">Explorar Snacks</button>
+      </div>
+    </div>
+    <div class="hero__img-wrap">
+      <img src="assets/img/banner2.png" alt="Snacktopia Banner" class="hero__banner" />
+    </div>
+  </div>
+</section>
+
+<!-- Categorías rápidas -->
+<section class="categorias">
+  <div class="container">
+    <div class="categorias__grid">
+      <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'snacks-salados'}})">
+        <span class="cat-item__icon">🥨</span>
+        <span>Snacks Salados</span>
+      </div>
+      <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'galletas'}})">
+        <span class="cat-item__icon">🍪</span>
+        <span>Galletas</span>
+      </div>
+      <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'dulces'}})">
+        <span class="cat-item__icon">🍬</span>
+        <span>Dulces</span>
+      </div>
+      <div class="cat-item cat-item--yellow" (click)="irOfertas()">
+        <span class="cat-item__icon">🏷️</span>
+        <span>Ofertas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Productos destacados -->
+<section class="destacados">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-titulo">Productos Destacados</h2>
+      <button class="btn-ver-todos" (click)="irProductos()">Ver todos →</button>
+    </div>
+    <div class="productos-grid">
+      @for (p of destacados; track p.id) {
+        <app-producto-card
+          [producto]="p"
+          (verDetalle)="verDetalle($event)"
+          (agregarCarrito)="agregar($event)"
+        />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Banner promo -->
+<section class="promo-banner">
+  <div class="container promo-banner__inner">
+    <div class="promo-banner__texto">
+      <h2>¡Combos y Packs con hasta 20% de descuento!</h2>
+      <p>Aprovecha nuestras ofertas especiales en packs de tus snacks favoritos.</p>
+      <button class="btn-promo" (click)="irOfertas()">Ver Ofertas</button>
+    </div>
+    <div class="promo-banner__emoji">🎉🍟🍪🍫🎉</div>
+  </div>
+</section>
