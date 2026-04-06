@@ -2,9 +2,7 @@ spring:
   application:
     name: snacktopia-backend
   datasource:
-    url: jdbc:postgresql://localhost:5432/snacktopia
-    username: postgres
-    password: rrr100911
+    url: postgresql://neondb_owner:npg_FZsBA8K6Noqe@ep-twilight-scene-aci85hpj-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -13,17 +11,17 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   error:
     include-message: always
 
 jwt:
-  secret: snacktopia-super-secret-key-2025-must-be-256-bits-minimum-for-hs256
-  expiration: 86400000
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:86400000}
 
 cors:
   allowed-origins:
-    - http://localhost:4200
-    - https://snacktopia.vercel.app
+    - ${FRONTEND_URL:http://localhost:4200}
