@@ -1,0 +1,25 @@
+<div class="ofertas-page">
+  <!-- Hero -->
+  <div class="ofertas-hero">
+    <div class="container ofertas-hero__inner">
+      <div>
+        <h1 class="ofertas-hero__titulo">🔥 Ofertas Especiales</h1>
+        <p class="ofertas-hero__sub">Packs y combos con hasta <strong>20% de descuento</strong>. ¡Solo por tiempo limitado!</p>
+      </div>
+      <div class="ofertas-hero__badge">HASTA -20%</div>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="container">
+    <div class="ofertas-grid">
+      @for (p of ofertas; track p.id) {
+        <app-producto-card
+          [producto]="p"
+          (verDetalle)="verDetalle($event)"
+          (agregarCarrito)="agregar($event)"
+        />
+      }
+    </div>
+  </div>
+</div>

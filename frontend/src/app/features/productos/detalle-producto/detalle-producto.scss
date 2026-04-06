@@ -1,0 +1,244 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+.detalle-page {
+  padding: 36px 0 60px;
+}
+
+// ── Breadcrumb ─────────────────────────────────────────────────
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+
+  a {
+    color: #888;
+    transition: v.$transition;
+    &:hover { color: v.$black; text-decoration: underline; }
+  }
+
+  &__actual { color: v.$black; font-weight: v.$fw-medium; }
+}
+
+// ── Grid principal ────────────────────────────────────────────
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+// ── Imagen ────────────────────────────────────────────────────
+.detalle-img-wrap {
+  position: relative;
+  background: #f9f9f9;
+  border-radius: v.$radius-lg;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+  min-height: 380px;
+}
+
+.detalle-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: v.$yellow;
+  color: v.$black;
+  font-size: 13px;
+  font-weight: v.$fw-extrabold;
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.4px;
+}
+
+.detalle-img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+
+  &:hover { transform: scale(1.05); }
+}
+
+// ── Info ──────────────────────────────────────────────────────
+.detalle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detalle-titulo {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: v.$fw-extrabold;
+  color: v.$black;
+  line-height: 1.3;
+}
+
+.detalle-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 18px;
+  color: #ddd;
+
+  span.filled { color: v.$black; }
+  small { font-size: 13px; color: #aaa; margin-left: 6px; }
+}
+
+// ── Precios ───────────────────────────────────────────────────
+.detalle-precios {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.detalle-precio-final {
+  font-size: 2rem;
+  font-weight: v.$fw-extrabold;
+  color: v.$black;
+}
+
+.detalle-precio-original {
+  font-size: 1.1rem;
+  color: #bbb;
+  text-decoration: line-through;
+}
+
+.detalle-ahorro {
+  font-size: 13px;
+  background: #f0fff4;
+  color: #276749;
+  border: 1px solid #9ae6b4;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: v.$fw-medium;
+}
+
+.detalle-desc {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  border-left: 3px solid v.$yellow;
+  padding-left: 14px;
+}
+
+// ── Acciones ──────────────────────────────────────────────────
+.detalle-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cantidad-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ddd;
+  background: v.$white;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: v.$fw-bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: v.$transition;
+  color: v.$black;
+
+  &:hover:not(:disabled) { border-color: v.$yellow; background: v.$yellow; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.qty-num {
+  font-size: 18px;
+  font-weight: v.$fw-bold;
+  min-width: 28px;
+  text-align: center;
+}
+
+.detalle-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-agregar {
+  @include m.btn-pill(v.$black, v.$white);
+  padding: 13px 22px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 160px;
+
+  &:hover       { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+  &.success     { background: #38a169; border-color: #38a169; color: v.$white; }
+}
+
+.btn-comprar {
+  @include m.btn-pill(v.$white, v.$black, v.$black);
+  padding: 13px 22px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 140px;
+
+  &:hover { background: v.$yellow; border-color: v.$yellow; }
+}
+
+// ── Extras ────────────────────────────────────────────────────
+.detalle-extras {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #666;
+
+  svg { color: #aaa; flex-shrink: 0; }
+}
+
+// ── Loading ───────────────────────────────────────────────────
+.detalle-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 16px;
+  color: #aaa;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #eee;
+  border-top-color: v.$yellow;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

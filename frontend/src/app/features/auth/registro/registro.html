@@ -1,0 +1,64 @@
+<section class="auth-page">
+  <div class="auth-card fade-in-up">
+    <div class="auth-logo">
+      <img src="assets/img/logo5.png" alt="Snacktopia" />
+    </div>
+
+    <h2 class="auth-titulo">Crear Cuenta</h2>
+    <p class="auth-sub">¿Ya tienes cuenta? <a routerLink="/auth/login" class="auth-link">Inicia sesión</a></p>
+
+    @if (error()) {
+      <div class="alert-error">{{ error() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form" novalidate>
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" formControlName="nombre" placeholder="Tu nombre"
+            class="input-snack" [class.input-error]="ctrl('nombre').invalid && ctrl('nombre').touched" />
+          @if (ctrl('nombre').invalid && ctrl('nombre').touched) {
+            <span class="error-msg">Nombre requerido</span>
+          }
+        </div>
+        <div class="form-group">
+          <label>Apellidos</label>
+          <input type="text" formControlName="apellidos" placeholder="Tus apellidos"
+            class="input-snack" [class.input-error]="ctrl('apellidos').invalid && ctrl('apellidos').touched" />
+          @if (ctrl('apellidos').invalid && ctrl('apellidos').touched) {
+            <span class="error-msg">Apellidos requeridos</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email" placeholder="tu@correo.com"
+          class="input-snack" [class.input-error]="ctrl('email').invalid && ctrl('email').touched" />
+        @if (ctrl('email').invalid && ctrl('email').touched) {
+          <span class="error-msg">Ingresa un correo válido</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarPass() ? 'text' : 'password'" formControlName="password"
+            placeholder="Mínimo 6 caracteres"
+            class="input-snack" [class.input-error]="ctrl('password').invalid && ctrl('password').touched" />
+          <button type="button" class="pass-toggle" (click)="mostrarPass.set(!mostrarPass())">
+            {{ mostrarPass() ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        @if (ctrl('password').invalid && ctrl('password').touched) {
+          <span class="error-msg">Mínimo 6 caracteres</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-auth" [disabled]="cargando()">
+        @if (cargando()) { <span class="spinner-sm"></span> Creando cuenta... }
+        @else { Crear mi cuenta }
+      </button>
+    </form>
+  </div>
+</section>

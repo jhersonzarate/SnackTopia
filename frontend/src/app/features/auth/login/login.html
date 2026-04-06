@@ -1,0 +1,67 @@
+<section class="auth-page">
+  <div class="auth-card fade-in-up">
+    <!-- Logo -->
+    <div class="auth-logo">
+      <img src="assets/img/logo5.png" alt="Snacktopia" />
+    </div>
+
+    <h2 class="auth-titulo">Iniciar sesión</h2>
+    <p class="auth-sub">¿Nuevo cliente? <a routerLink="/auth/registro" class="auth-link">Crear cuenta</a></p>
+
+    @if (error()) {
+      <div class="alert-error">{{ error() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form" novalidate>
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@correo.com"
+          class="input-snack"
+          [class.input-error]="emailCtrl.invalid && emailCtrl.touched"
+        />
+        @if (emailCtrl.invalid && emailCtrl.touched) {
+          <span class="error-msg">Ingresa un correo válido</span>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-pass-wrap">
+          <input
+            id="password"
+            [type]="mostrarPass() ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Mínimo 6 caracteres"
+            class="input-snack"
+            [class.input-error]="passwordCtrl.invalid && passwordCtrl.touched"
+          />
+          <button type="button" class="pass-toggle" (click)="mostrarPass.set(!mostrarPass())">
+            {{ mostrarPass() ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        @if (passwordCtrl.invalid && passwordCtrl.touched) {
+          <span class="error-msg">La contraseña debe tener al menos 6 caracteres</span>
+        }
+      </div>
+
+      <!-- Olvidé contraseña -->
+      <div class="auth-forgot">
+        <a routerLink="/auth/restablecer" class="auth-link">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button type="submit" class="btn-auth" [disabled]="cargando()">
+        @if (cargando()) {
+          <span class="spinner-sm"></span> Ingresando...
+        } @else {
+          Conectarme a mi cuenta
+        }
+      </button>
+    </form>
+  </div>
+</section>

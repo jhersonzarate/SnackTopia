@@ -1,0 +1,45 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+.ofertas-hero {
+  background: v.$black;
+  padding: 44px 0 36px;
+
+  &__inner {
+    @include m.flex-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  &__titulo {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: v.$fw-extrabold;
+    color: v.$yellow;
+    margin-bottom: 8px;
+  }
+
+  &__sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    strong { color: v.$yellow; }
+  }
+
+  &__badge {
+    background: v.$yellow;
+    color: v.$black;
+    font-size: 22px;
+    font-weight: v.$fw-extrabold;
+    padding: 14px 24px;
+    border-radius: v.$radius-md;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+}
+
+.container { padding-top: 40px; padding-bottom: 60px; }
+
+.ofertas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}

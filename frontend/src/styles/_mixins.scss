@@ -1,0 +1,96 @@
+@use 'variables' as v;
+
+// ── Responsive ────────────────────────────────────────────────
+@mixin sm  { @media (min-width: v.$bp-sm)  { @content; } }
+@mixin md  { @media (min-width: v.$bp-md)  { @content; } }
+@mixin lg  { @media (min-width: v.$bp-lg)  { @content; } }
+@mixin xl  { @media (min-width: v.$bp-xl)  { @content; } }
+
+// ── Flex helpers ──────────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ── Botón pill base ───────────────────────────────────────────
+@mixin btn-pill($bg, $color, $border: $bg) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: $bg;
+  color: $color;
+  border: 2px solid $border;
+  border-radius: v.$radius-pill;
+  padding: 10px 24px;
+  font-weight: v.$fw-bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: v.$transition;
+  white-space: nowrap;
+  font-family: v.$font-primary;
+}
+
+// ── Truncar texto ─────────────────────────────────────────────
+@mixin text-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ── Sombra de tarjeta ─────────────────────────────────────────
+@mixin card-hover {
+  transition: v.$transition;
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: v.$shadow-hover;
+  }
+}
+
+// ── Input base ───────────────────────────────────────────────
+@mixin input-base {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid v.$gray-border;
+  border-radius: v.$radius-sm;
+  font-size: 15px;
+  font-family: v.$font-primary;
+  outline: none;
+  transition: v.$transition;
+  background: v.$white;
+
+  &:focus {
+    border-color: v.$yellow;
+    box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.18);
+  }
+
+  &::placeholder { color: #bbb; }
+}
+
+// ── Título de sección ─────────────────────────────────────────
+@mixin section-title {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: v.$fw-extrabold;
+  color: v.$black;
+  text-align: center;
+  margin-bottom: 36px;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 4px;
+    background: v.$yellow;
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+}

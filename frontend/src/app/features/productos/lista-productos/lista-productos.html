@@ -1,0 +1,73 @@
+<div class="lista-page">
+  <!-- Page Header -->
+  <div class="lista-hero">
+    <div class="container">
+      <h1 class="lista-hero__titulo">Nuestros Productos</h1>
+      <p class="lista-hero__sub">Los mejores snacks, siempre frescos y al mejor precio</p>
+    </div>
+  </div>
+
+  <div class="container lista-body">
+    <!-- Filtros -->
+    <aside class="filtros">
+      <div class="filtros__buscar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          [value]="textoBusqueda()"
+          (input)="onBuscar($any($event.target).value)"
+          class="filtros__input"
+        />
+      </div>
+
+      <div class="filtros__categorias">
+        <h3 class="filtros__titulo">Categorías</h3>
+        @for (cat of categorias; track cat.id) {
+          <button
+            class="filtro-btn"
+            [class.active]="categoriaActiva() === cat.id && !marcaActiva()"
+            (click)="onCategoria(cat.id)"
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      @if (marcaActiva()) {
+        <div class="filtros__activo">
+          <span>Filtrando: <strong>{{ marcaActiva() }}</strong></span>
+          <button class="btn-limpiar" (click)="limpiarFiltros()">✕ Limpiar</button>
+        </div>
+      }
+    </aside>
+
+    <!-- Resultados -->
+    <main class="resultados">
+      <div class="resultados__header">
+        <p class="resultados__count">
+          {{ productosFiltrados().length }} producto{{ productosFiltrados().length !== 1 ? 's' : '' }} encontrado{{ productosFiltrados().length !== 1 ? 's' : '' }}
+        </p>
+      </div>
+
+      @if (sinResultados()) {
+        <div class="sin-resultados">
+          <span class="sin-resultados__emoji">🔍</span>
+          <h3>No encontramos productos</h3>
+          <p>Intenta con otro término o limpia los filtros.</p>
+          <button class="btn-limpiar-grande" (click)="limpiarFiltros()">Limpiar filtros</button>
+        </div>
+      } @else {
+        <div class="productos-grid">
+          @for (p of productosFiltrados(); track p.id) {
+            <app-producto-card
+              [producto]="p"
+              (verDetalle)="verDetalle($event)"
+              (agregarCarrito)="agregar($event)"
+            />
+          }
+        </div>
+      }
+    </main>
+  </div>
+</div>

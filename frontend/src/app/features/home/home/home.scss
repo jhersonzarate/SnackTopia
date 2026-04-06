@@ -1,0 +1,224 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+// ── Hero ──────────────────────────────────────────────────────
+.hero {
+  background: linear-gradient(135deg, #fffde7 0%, #fff9c4 50%, #fff 100%);
+  padding: 60px 0 40px;
+  overflow: hidden;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  &__text { flex: 1; }
+
+  &__titulo {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: v.$black;
+    margin-bottom: 16px;
+  }
+
+  &__marca {
+    color: v.$black;
+    background: v.$yellow;
+    padding: 2px 12px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  &__subtitulo {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 28px;
+    max-width: 440px;
+    line-height: 1.6;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__img-wrap {
+    flex: 1;
+    max-width: 580px;
+
+    @media (max-width: 768px) { max-width: 100%; }
+  }
+
+  &__banner {
+    width: 100%;
+    border-radius: v.$radius-lg;
+    box-shadow: v.$shadow-hover;
+    object-fit: cover;
+  }
+}
+
+.btn-hero-primary {
+  @include m.btn-pill(v.$black, v.$white);
+  padding: 14px 28px;
+  font-size: 15px;
+  &:hover { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+}
+
+.btn-hero-outline {
+  @include m.btn-pill(transparent, v.$black, v.$black);
+  padding: 14px 28px;
+  font-size: 15px;
+  &:hover { background: v.$black; color: v.$white; }
+}
+
+// ── Categorías ────────────────────────────────────────────────
+.categorias {
+  padding: 36px 0;
+  background: v.$white;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @media (max-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  }
+}
+
+.cat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border: 2px solid #eee;
+  border-radius: v.$radius-md;
+  cursor: pointer;
+  transition: v.$transition;
+  font-weight: 600;
+  font-size: 14px;
+  color: v.$text-primary;
+  background: v.$white;
+
+  &:hover {
+    border-color: v.$yellow;
+    background: #fffde7;
+    transform: translateY(-4px);
+    box-shadow: v.$shadow-card;
+  }
+
+  &--yellow {
+    background: v.$yellow;
+    border-color: v.$yellow;
+    font-weight: 700;
+    &:hover { background: v.$yellow-dark; border-color: v.$yellow-dark; }
+  }
+
+  &__icon { font-size: 32px; }
+}
+
+// ── Destacados ────────────────────────────────────────────────
+.destacados {
+  padding: 50px 0;
+  background: v.$gray-light;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section-titulo {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: v.$black;
+  margin: 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 48px;
+    height: 4px;
+    background: v.$yellow;
+    border-radius: 2px;
+  }
+}
+
+.btn-ver-todos {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: v.$black;
+  cursor: pointer;
+  transition: v.$transition;
+  font-family: v.$font-primary;
+  padding: 8px 0;
+
+  &:hover { color: v.$yellow-dark; text-decoration: underline; }
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+// ── Promo banner ──────────────────────────────────────────────
+.promo-banner {
+  background: v.$black;
+  padding: 48px 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  &__texto {
+    h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: v.$yellow;
+      margin-bottom: 10px;
+    }
+    p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__emoji {
+    font-size: 40px;
+    letter-spacing: 6px;
+    flex-shrink: 0;
+  }
+}
+
+.btn-promo {
+  @include m.btn-pill(v.$yellow, v.$black);
+  padding: 13px 28px;
+  font-size: 15px;
+  border-color: v.$yellow;
+  &:hover { background: v.$yellow-dark; border-color: v.$yellow-dark; }
+}

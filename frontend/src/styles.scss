@@ -1,0 +1,202 @@
+/* ================================================================
+   SNACKTOPIA — Global Styles Entry Point
+   Combina Tailwind + SCSS custom para el diseño original
+================================================================ */
+@use './styles/variables' as v;
+@use './styles/mixins' as m;
+@use './styles/reset';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ── Contenedor central ─────────────────────────────────────── */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Utilidades de texto ─────────────────────────────────────── */
+.text-yellow  { color: v.$yellow; }
+.text-muted   { color: v.$text-muted; }
+.fw-bold      { font-weight: v.$fw-bold; }
+.fw-extrabold { font-weight: v.$fw-extrabold; }
+
+/* ── Scrollbar personalizada ─────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: #f1f1f1; border-radius: 10px; }
+::-webkit-scrollbar-thumb  { background: #ccc; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+/* ── Animaciones globales ─────────────────────────────────────── */
+@keyframes slideInRight {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-110%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-right { animation: slideInRight 0.3s ease-out; }
+.slide-in-left  { animation: slideInLeft  0.3s ease-out; }
+.fade-in        { animation: fadeIn       0.2s ease-out; }
+.fade-in-up     { animation: fadeInUp     0.35s ease-out; }
+
+/* ── Overlay global ─────────────────────────────────────────── */
+.overlay-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9990;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Section title helper ────────────────────────────────────── */
+.section-titulo-center {
+  @include m.section-title;
+}
+
+/* ── Botones globales Tailwind layer ─────────────────────────── */
+@layer components {
+  .btn-snack-primary {
+    @apply inline-flex items-center justify-center gap-2 font-bold rounded-full
+           transition-all duration-200 cursor-pointer whitespace-nowrap;
+    background: v.$black;
+    color: v.$white;
+    border: 2px solid v.$black;
+    padding: 11px 26px;
+    font-family: v.$font-primary;
+
+    &:hover {
+      background: v.$yellow;
+      color: v.$black;
+      border-color: v.$yellow;
+    }
+  }
+
+  .btn-snack-outline {
+    @apply inline-flex items-center justify-center gap-2 font-bold rounded-full
+           transition-all duration-200 cursor-pointer whitespace-nowrap;
+    background: transparent;
+    color: v.$black;
+    border: 2px solid v.$black;
+    padding: 11px 26px;
+    font-family: v.$font-primary;
+
+    &:hover {
+      background: v.$black;
+      color: v.$white;
+    }
+  }
+
+  .btn-snack-yellow {
+    @apply inline-flex items-center justify-center gap-2 font-bold rounded-full
+           transition-all duration-200 cursor-pointer whitespace-nowrap;
+    background: v.$yellow;
+    color: v.$black;
+    border: 2px solid v.$yellow;
+    padding: 11px 26px;
+    font-family: v.$font-primary;
+
+    &:hover {
+      background: v.$yellow-dark;
+      border-color: v.$yellow-dark;
+    }
+  }
+
+  /* Input estilizado */
+  .input-snack {
+    @include m.input-base;
+  }
+
+  /* Tarjeta base */
+  .card-snack {
+    background: v.$white;
+    border: 1px solid v.$gray-border;
+    border-radius: v.$radius-md;
+    box-shadow: v.$shadow-card;
+    transition: v.$transition;
+
+    &:hover {
+      box-shadow: v.$shadow-hover;
+      transform: translateY(-4px);
+    }
+  }
+}
+
+/* ── Precio tachado ─────────────────────────────────────────── */
+.precio-original-tachado {
+  text-decoration: line-through;
+  color: v.$text-muted;
+  font-size: 0.875em;
+}
+
+/* ── Página wrapper ──────────────────────────────────────────── */
+.page-wrapper {
+  min-height: calc(100vh - 180px);
+  padding: 40px 0 60px;
+}
+
+/* ── Form general ─────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+
+  label {
+    font-size: 14px;
+    font-weight: v.$fw-medium;
+    color: v.$text-primary;
+  }
+
+  input, select, textarea {
+    @include m.input-base;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .error-msg {
+    font-size: 12px;
+    color: #e53e3e;
+    margin-top: 2px;
+  }
+}
+
+/* ── Toast / Alert ───────────────────────────────────────────── */
+.alert-success {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+  color: #276749;
+  border-radius: v.$radius-sm;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.alert-error {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  border-radius: v.$radius-sm;
+  padding: 12px 16px;
+  font-size: 14px;
+}
