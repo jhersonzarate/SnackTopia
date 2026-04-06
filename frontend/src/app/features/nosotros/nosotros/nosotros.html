@@ -1,1 +1,82 @@
-<p>nosotros works!</p>
+<!-- Hero -->
+<section class="nosotros-hero">
+  <div class="container nosotros-hero__inner">
+    <div class="nosotros-hero__texto">
+      <h1 class="nosotros-hero__titulo">Sobre <span class="nosotros-hero__marca">Snacktopia</span></h1>
+      <p class="nosotros-hero__desc">
+        En Snacktopia nos apasiona llevar hasta ti los mejores snacks del mercado, con calidad y precios accesibles.
+        Nuestra misión es ofrecer una experiencia divertida y deliciosa para todos los amantes de los snacks.
+      </p>
+      <a routerLink="/productos" class="btn-nosotros">Ver nuestros productos →</a>
+    </div>
+    <div class="nosotros-hero__emojis">🍟🍪🍫🥨🍬</div>
+  </div>
+</section>
+
+<!-- Valores -->
+<section class="nosotros-valores">
+  <div class="container">
+    <h2 class="section-titulo-center">¿Por qué elegirnos?</h2>
+    <div class="valores-grid">
+      @for (v of valores; track v.titulo) {
+        <div class="valor-card">
+          <div class="valor-card__icon">{{ v.icon }}</div>
+          <h3 class="valor-card__titulo">{{ v.titulo }}</h3>
+          <p class="valor-card__desc">{{ v.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Misión -->
+<section class="nosotros-mision">
+  <div class="container nosotros-mision__inner">
+    <div class="nosotros-mision__texto">
+      <h2>Nuestra Misión</h2>
+      <p>
+        Somos una tienda 100% peruana especializada en snacks, galletas y dulces.
+        Creemos que disfrutar un buen snack no debería ser un lujo, sino parte del día a día de todos.
+      </p>
+      <p>
+        Trabajamos directamente con distribuidores para ofrecerte los mejores precios y la mayor variedad
+        de productos, desde las marcas más reconocidas hasta las más divertidas.
+      </p>
+    </div>
+    <div class="nosotros-mision__stat-grid">
+      <div class="stat">
+        <span class="stat__num">50+</span>
+        <span class="stat__label">Productos disponibles</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">100%</span>
+        <span class="stat__label">Clientes satisfechos</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">24h</span>
+        <span class="stat__label">Tiempo de entrega Lima</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">2023</span>
+        <span class="stat__label">Año de fundación</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Equipo -->
+<section class="nosotros-equipo">
+  <div class="container">
+    <h2 class="section-titulo-center">Nuestro Equipo</h2>
+    <p class="equipo-intro">Somos un equipo joven, creativo y comprometido en hacer de Snacktopia tu tienda favorita.</p>
+    <div class="equipo-grid">
+      @for (m of equipo; track m.nombre) {
+        <div class="equipo-card">
+          <div class="equipo-card__avatar">{{ m.emoji }}</div>
+          <h3 class="equipo-card__nombre">{{ m.nombre }}</h3>
+          <p class="equipo-card__rol">{{ m.rol }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

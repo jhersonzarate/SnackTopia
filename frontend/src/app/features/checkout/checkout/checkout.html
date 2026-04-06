@@ -1,1 +1,178 @@
-<p>checkout works!</p>
+<div class="checkout-wrapper">
+  <!-- Panel izquierdo: Formulario -->
+  <div class="checkout-left">
+
+    <!-- Logo + breadcrumb -->
+    <div class="checkout-header">
+      <a routerLink="/" class="checkout-logo">
+        <img src="assets/img/logo5.png" alt="Snacktopia" />
+      </a>
+      <nav class="breadcrumb">
+        <a routerLink="/" class="breadcrumb__link">Carrito</a>
+        <span class="breadcrumb__sep">›</span>
+        <span [class.breadcrumb__active]="paso() === 1" [class.breadcrumb__done]="paso() === 2">Información</span>
+        <span class="breadcrumb__sep">›</span>
+        <span [class.breadcrumb__active]="paso() === 2">Pago</span>
+      </nav>
+    </div>
+
+    <!-- Paso 1: Información -->
+    @if (paso() === 1) {
+      <div class="checkout-form-wrap fade-in-up">
+        <div class="checkout-user-info">
+          <div class="checkout-user-info__avatar">
+            {{ auth.usuarioActivo()?.nombre?.charAt(0) }}
+          </div>
+          <div>
+            <p class="checkout-user-info__name">{{ auth.usuarioActivo()?.nombre }} {{ auth.usuarioActivo()?.apellidos }}</p>
+            <p class="checkout-user-info__email">{{ auth.usuarioActivo()?.email }}</p>
+          </div>
+        </div>
+
+        <h2 class="checkout-section-title">Dirección de envío</h2>
+
+        @if (error()) {
+          <div class="alert-error">{{ error() }}</div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="continuarPago()" novalidate>
+          <div class="form-group">
+            <label>Dirección completa *</label>
+            <input type="text" formControlName="direccion" placeholder="Ej: Av. Los Jardines 123, Dpto 4B"
+              class="input-snack" [class.input-error]="ctrl('direccion').invalid && ctrl('direccion').touched" />
+            @if (ctrl('direccion').invalid && ctrl('direccion').touched) {
+              <span class="error-msg">Ingresa tu dirección</span>
+            }
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Distrito *</label>
+              <input type="text" formControlName="distrito" placeholder="Ej: Miraflores"
+                class="input-snack" [class.input-error]="ctrl('distrito').invalid && ctrl('distrito').touched" />
+              @if (ctrl('distrito').invalid && ctrl('distrito').touched) {
+                <span class="error-msg">Ingresa el distrito</span>
+              }
+            </div>
+            <div class="form-group">
+              <label>Región *</label>
+              <select formControlName="region" class="input-snack"
+                [class.input-error]="ctrl('region').invalid && ctrl('region').touched">
+                <option value="" disabled>Seleccionar...</option>
+                @for (r of regiones; track r) {
+                  <option [value]="r">{{ r }}</option>
+                }
+              </select>
+              @if (ctrl('region').invalid && ctrl('region').touched) {
+                <span class="error-msg">Selecciona una región</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono *</label>
+            <input type="tel" formControlName="telefono" placeholder="Ej: 987654321"
+              class="input-snack" [class.input-error]="ctrl('telefono').invalid && ctrl('telefono').touched" />
+            @if (ctrl('telefono').invalid && ctrl('telefono').touched) {
+              <span class="error-msg">Ingresa un número válido de 9 dígitos</span>
+            }
+          </div>
+
+          <div class="checkout-actions">
+            <a routerLink="/" class="btn-back-link">← Volver a la tienda</a>
+            <button type="submit" class="btn-checkout-primary">
+              Continuar con el pago
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+
+    <!-- Paso 2: Confirmación de pago -->
+    @if (paso() === 2) {
+      <div class="checkout-payment fade-in-up">
+        <h2 class="checkout-section-title">Confirmar pedido</h2>
+
+        <div class="payment-summary-box">
+          <div class="payment-row">
+            <span class="payment-label">Contacto</span>
+            <span class="payment-value">{{ auth.usuarioActivo()?.email }}</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">Dirección</span>
+            <span class="payment-value">
+              {{ form.value.direccion }}, {{ form.value.distrito }}, {{ form.value.region }}
+            </span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">Teléfono</span>
+            <span class="payment-value">{{ form.value.telefono }}</span>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <h3>Método de pago</h3>
+          <div class="payment-method__item payment-method__item--active">
+            <span class="payment-method__icon">💳</span>
+            <div>
+              <p class="payment-method__name">Pago contra entrega</p>
+              <p class="payment-method__desc">Paga en efectivo cuando recibas tu pedido</p>
+            </div>
+            <span class="payment-method__check">✓</span>
+          </div>
+        </div>
+
+        @if (error()) {
+          <div class="alert-error">{{ error() }}</div>
+        }
+
+        <div class="checkout-actions">
+          <button type="button" class="btn-back-link" (click)="volverInfo()">← Volver a información</button>
+          <button type="button" class="btn-checkout-primary" (click)="procesarPago()" [disabled]="cargando()">
+            @if (cargando()) {
+              <span class="spinner-sm"></span> Procesando...
+            } @else {
+              Confirmar pedido
+            }
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Panel derecho: Resumen -->
+  <div class="checkout-right">
+    <h3 class="checkout-right__titulo">Resumen del pedido</h3>
+
+    <div class="checkout-items">
+      @for (item of carrito.items(); track item.id) {
+        <div class="checkout-item">
+          <div class="checkout-item__img">
+            <img [src]="item.imagen" [alt]="item.nombre" />
+            <span class="checkout-item__qty">{{ item.cantidad }}</span>
+          </div>
+          <div class="checkout-item__info">
+            <p class="checkout-item__nombre">{{ item.nombre }}</p>
+            <p class="checkout-item__precio">{{ formatPrecio(item.precioFinal) }}</p>
+          </div>
+          <span class="checkout-item__total">{{ formatPrecio(item.precioFinal * item.cantidad) }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="checkout-totales">
+      <div class="totales-row">
+        <span>Subtotal</span>
+        <span>{{ formatPrecio(subtotal) }}</span>
+      </div>
+      <div class="totales-row">
+        <span>Envío</span>
+        <span class="totales-gratis">Gratis</span>
+      </div>
+      <div class="totales-row totales-row--total">
+        <strong>Total</strong>
+        <strong>{{ formatPrecio(subtotal) }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,45 @@
-<p>restablecer works!</p>
+<section class="auth-page">
+  <div class="auth-card fade-in-up">
+    <div class="auth-logo">
+      <img src="assets/img/logo5.png" alt="Snacktopia" />
+    </div>
+
+    @if (!enviado()) {
+      <h2 class="auth-titulo">Restablecer contraseña</h2>
+      <p class="auth-sub">Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="tu&#64;correo.com"
+            class="input-snack"
+            [class.input-error]="form.get('email')!.invalid && form.get('email')!.touched"
+          />
+          @if (form.get('email')!.invalid && form.get('email')!.touched) {
+            <span class="error-msg">Ingresa un correo válido</span>
+          }
+        </div>
+
+        <button type="submit" class="btn-auth" [disabled]="cargando()">
+          @if (cargando()) { <span class="spinner-sm"></span> Enviando... }
+          @else { Enviar enlace de recuperación }
+        </button>
+      </form>
+    } @else {
+      <div class="success-state">
+        <div class="success-state__icon">📧</div>
+        <h3>¡Correo enviado!</h3>
+        <p>Revisa tu bandeja de entrada y sigue las instrucciones para restablecer tu contraseña.</p>
+      </div>
+    }
+
+    <div class="auth-nav-links">
+      <a routerLink="/auth/login" class="auth-link">← Volver a iniciar sesión</a>
+      <a routerLink="/auth/registro" class="auth-link">Crear cuenta</a>
+    </div>
+  </div>
+</section>

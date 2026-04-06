@@ -1,0 +1,48 @@
+@use '../../../../styles/variables' as v;
+@use '../login/login.scss';
+
+.page-auth__card--wide {
+  max-width: 520px;
+}
+
+.page-auth__form--grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    input {
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: v.$radius-md;
+      font-size: 15px;
+
+      &:focus {
+        outline: none;
+        border-color: v.$yellow;
+        box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.35);
+      }
+    }
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+
+  .btn-submit.full {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}

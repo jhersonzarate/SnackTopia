@@ -1,1 +1,137 @@
-<p>libro-reclamaciones works!</p>
+<div class="reclamo-page">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="reclamo-header">
+      <img src="assets/img/LibroReclamaciones.png" alt="Libro de Reclamaciones" class="reclamo-header__img" />
+      <div>
+        <h1 class="reclamo-header__titulo">Libro de Reclamaciones</h1>
+        <p class="reclamo-header__sub">
+          Conforme a lo establecido en el Código de Protección y Defensa del Consumidor, tienes derecho a
+          registrar tu reclamo o queja.
+        </p>
+      </div>
+    </div>
+
+    @if (enviado()) {
+      <div class="reclamo-success fade-in-up">
+        <div class="reclamo-success__icon">✅</div>
+        <h2>Reclamo registrado</h2>
+        <p>Tu reclamo ha sido registrado exitosamente.</p>
+        <div class="reclamo-success__nro">N° de reclamo: <strong>{{ nroReclamo() }}</strong></div>
+        <p class="reclamo-success__info">
+          Recibirás una respuesta en tu correo electrónico dentro de los próximos 30 días hábiles,
+          conforme a la normativa vigente.
+        </p>
+        <button class="btn-nuevo" (click)="enviado.set(false)">Registrar nuevo reclamo</button>
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="submit()" class="reclamo-form fade-in-up" novalidate>
+
+        <section class="reclamo-section">
+          <h3 class="reclamo-section__titulo">Datos del Consumidor</h3>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" formControlName="nombre" placeholder="Tu nombre"
+                class="input-snack" [class.input-error]="ctrl('nombre').invalid && ctrl('nombre').touched" />
+              @if (ctrl('nombre').invalid && ctrl('nombre').touched) {
+                <span class="error-msg">Campo requerido</span>
+              }
+            </div>
+            <div class="form-group">
+              <label>Apellidos *</label>
+              <input type="text" formControlName="apellidos" placeholder="Tus apellidos"
+                class="input-snack" [class.input-error]="ctrl('apellidos').invalid && ctrl('apellidos').touched" />
+              @if (ctrl('apellidos').invalid && ctrl('apellidos').touched) {
+                <span class="error-msg">Campo requerido</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Tipo de Documento *</label>
+              <select formControlName="tipoDoc" class="input-snack">
+                <option value="DNI">DNI</option>
+                <option value="CE">Carné de Extranjería</option>
+                <option value="RUC">RUC</option>
+                <option value="Pasaporte">Pasaporte</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>N° de Documento *</label>
+              <input type="text" formControlName="nroDoc" placeholder="12345678"
+                class="input-snack" [class.input-error]="ctrl('nroDoc').invalid && ctrl('nroDoc').touched" />
+              @if (ctrl('nroDoc').invalid && ctrl('nroDoc').touched) {
+                <span class="error-msg">Mínimo 8 caracteres</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Correo electrónico *</label>
+              <input type="email" formControlName="email" placeholder="tu&#64;correo.com"
+                class="input-snack" [class.input-error]="ctrl('email').invalid && ctrl('email').touched" />
+              @if (ctrl('email').invalid && ctrl('email').touched) {
+                <span class="error-msg">Correo inválido</span>
+              }
+            </div>
+            <div class="form-group">
+              <label>Teléfono *</label>
+              <input type="tel" formControlName="telefono" placeholder="987654321"
+                class="input-snack" [class.input-error]="ctrl('telefono').invalid && ctrl('telefono').touched" />
+              @if (ctrl('telefono').invalid && ctrl('telefono').touched) {
+                <span class="error-msg">Campo requerido</span>
+              }
+            </div>
+          </div>
+        </section>
+
+        <section class="reclamo-section">
+          <h3 class="reclamo-section__titulo">Identificación del Bien Contratado</h3>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Tipo de bien *</label>
+              <select formControlName="tipoBien" class="input-snack">
+                <option value="Producto">Producto</option>
+                <option value="Servicio">Servicio</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Monto reclamado (opcional)</label>
+              <input type="text" formControlName="monto" placeholder="S/. 0.00" class="input-snack" />
+            </div>
+          </div>
+        </section>
+
+        <section class="reclamo-section">
+          <h3 class="reclamo-section__titulo">Detalle del Reclamo</h3>
+          <div class="form-group">
+            <label>Descripción del reclamo *</label>
+            <textarea formControlName="descripcion" rows="5"
+              placeholder="Describe detalladamente tu reclamo (mínimo 20 caracteres)..."
+              class="input-snack textarea-snack"
+              [class.input-error]="ctrl('descripcion').invalid && ctrl('descripcion').touched"></textarea>
+            @if (ctrl('descripcion').invalid && ctrl('descripcion').touched) {
+              <span class="error-msg">Mínimo 20 caracteres</span>
+            }
+          </div>
+        </section>
+
+        <div class="reclamo-footer">
+          <p class="reclamo-aviso">
+            La empresa dará respuesta al reclamo en un plazo no mayor a 30 días hábiles.
+          </p>
+          <button type="submit" class="btn-reclamo" [disabled]="cargando()">
+            @if (cargando()) { <span class="spinner-sm"></span> Enviando... }
+            @else { Enviar Reclamo }
+          </button>
+        </div>
+
+      </form>
+    }
+  </div>
+</div>

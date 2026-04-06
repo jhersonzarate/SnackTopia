@@ -1,0 +1,155 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+.contacto-page {
+  padding: 60px 0 80px;
+  background: #fafafa;
+}
+
+.contacto-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 52px;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.contacto-titulo {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: v.$black;
+  margin-bottom: 12px;
+}
+
+.contacto-sub {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  &__icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  &__label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; font-weight: 700; margin-bottom: 2px; }
+  &__valor { font-size: 14px; color: v.$text-primary; font-weight: 600; }
+}
+
+.redes-sociales {
+  display: flex;
+  gap: 10px;
+}
+
+.red-social {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: v.$black;
+  color: v.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: v.$transition;
+
+  &:hover { background: v.$yellow; color: v.$black; transform: scale(1.1); }
+}
+
+// ── Formulario ────────────────────────────────────────────────
+.contacto-form-wrap {
+  background: v.$white;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-hover;
+  padding: 36px 32px;
+  border: 1px solid #eee;
+
+  @media (max-width: 600px) { padding: 24px 20px; }
+}
+
+.contacto-form { display: flex; flex-direction: column; gap: 0; }
+
+.form-titulo {
+  font-size: 20px;
+  font-weight: 800;
+  color: v.$black;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid v.$yellow;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  @media (max-width: 500px) { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  label { font-size: 13px; font-weight: 600; color: v.$text-primary; }
+}
+
+.input-snack { @include m.input-base; }
+.textarea-snack { resize: vertical; min-height: 120px; }
+
+.input-error {
+  border-color: #fc8181 !important;
+  &:focus { box-shadow: 0 0 0 3px rgba(252,129,129,0.15) !important; }
+}
+
+.error-msg { font-size: 11px; color: #e53e3e; }
+
+.btn-enviar {
+  @include m.btn-pill(v.$yellow, v.$black, v.$yellow);
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  justify-content: center;
+  letter-spacing: 0.3px;
+  border: 2px solid v.$yellow;
+
+  &:hover:not(:disabled) { background: v.$yellow-dark; border-color: v.$yellow-dark; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+// ── Success state ─────────────────────────────────────────────
+.contacto-success {
+  text-align: center;
+  padding: 40px 20px;
+
+  &__icon { font-size: 56px; margin-bottom: 16px; }
+  h3 { font-size: 20px; font-weight: 800; color: v.$black; margin-bottom: 10px; }
+  p  { font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.6; }
+}
+
+.btn-otro {
+  @include m.btn-pill(v.$black, v.$white);
+  &:hover { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+}
+
+.spinner-sm {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: v.$black;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

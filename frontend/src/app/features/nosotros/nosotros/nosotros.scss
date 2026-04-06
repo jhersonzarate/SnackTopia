@@ -1,0 +1,173 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+.nosotros-hero {
+  background: linear-gradient(135deg, #fffde7 0%, #fff9c4 50%, #fff 100%);
+  padding: 56px 0 48px;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  &__texto { max-width: 560px; }
+
+  &__titulo {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: v.$black;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  &__marca {
+    background: v.$yellow;
+    padding: 2px 12px;
+    border-radius: 6px;
+  }
+
+  &__desc {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  &__emojis {
+    font-size: 48px;
+    letter-spacing: 8px;
+    flex-shrink: 0;
+    @media (max-width: 600px) { font-size: 32px; }
+  }
+}
+
+.btn-nosotros {
+  @include m.btn-pill(v.$black, v.$white);
+  display: inline-flex;
+  &:hover { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+}
+
+.nosotros-valores {
+  padding: 60px 0;
+  background: v.$gray-light;
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.valor-card {
+  background: v.$white;
+  border-radius: v.$radius-md;
+  padding: 28px 24px;
+  text-align: center;
+  border: 1px solid #eee;
+  transition: v.$transition;
+
+  &:hover { transform: translateY(-6px); box-shadow: v.$shadow-hover; }
+
+  &__icon  { font-size: 40px; margin-bottom: 14px; }
+  &__titulo { font-size: 16px; font-weight: 800; color: v.$black; margin-bottom: 10px; }
+  &__desc  { font-size: 13px; color: #666; line-height: 1.6; }
+}
+
+.nosotros-mision {
+  padding: 60px 0;
+  background: v.$white;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    align-items: center;
+    @media (max-width: 768px) { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  &__texto {
+    h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800;
+      color: v.$black;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+  }
+
+  &__stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.stat {
+  background: v.$gray-light;
+  border-radius: v.$radius-md;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #eee;
+
+  &__num {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: v.$black;
+    margin-bottom: 4px;
+  }
+
+  &__label { font-size: 12px; color: #888; }
+}
+
+.nosotros-equipo {
+  padding: 60px 0;
+  background: v.$black;
+}
+
+.equipo-intro {
+  text-align: center;
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  margin-top: -20px;
+  margin-bottom: 36px;
+}
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.equipo-card {
+  text-align: center;
+  padding: 28px 20px;
+  border: 1px solid rgba(255,204,0,0.3);
+  border-radius: v.$radius-md;
+  transition: v.$transition;
+
+  &:hover {
+    border-color: v.$yellow;
+    background: rgba(255,204,0,0.06);
+  }
+
+  &__avatar { font-size: 48px; margin-bottom: 12px; }
+  &__nombre { font-size: 15px; font-weight: 800; color: v.$white; margin-bottom: 6px; }
+  &__rol    { font-size: 13px; color: v.$yellow; }
+}
+
+// Override para títulos sobre fondo oscuro
+.nosotros-equipo .section-titulo-center {
+  color: v.$white;
+  &::after { margin: 10px auto 0; }
+}

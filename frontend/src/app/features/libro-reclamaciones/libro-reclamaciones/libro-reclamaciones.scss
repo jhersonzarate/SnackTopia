@@ -1,0 +1,153 @@
+@use '../../../../styles/variables' as v;
+@use '../../../../styles/mixins' as m;
+
+.reclamo-page {
+  padding: 50px 0 80px;
+  background: #fafafa;
+}
+
+.reclamo-header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: v.$white;
+  border: 2px solid #ddd;
+  border-radius: v.$radius-lg;
+  padding: 28px 32px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+
+  &__img { width: 90px; height: auto; flex-shrink: 0; }
+
+  &__titulo {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    color: v.$black;
+    margin-bottom: 8px;
+  }
+
+  &__sub { font-size: 14px; color: #666; line-height: 1.6; max-width: 600px; }
+}
+
+.reclamo-form {
+  background: v.$white;
+  border-radius: v.$radius-lg;
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+
+.reclamo-section {
+  padding: 28px 32px;
+  border-bottom: 1px solid #f0f0f0;
+
+  @media (max-width: 600px) { padding: 22px 20px; }
+
+  &__titulo {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: v.$black;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid v.$yellow;
+    display: inline-block;
+  }
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  @media (max-width: 560px) { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  label { font-size: 13px; font-weight: 600; color: v.$text-primary; }
+}
+
+.input-snack  { @include m.input-base; }
+.textarea-snack { resize: vertical; min-height: 120px; }
+
+.input-error {
+  border-color: #fc8181 !important;
+  &:focus { box-shadow: 0 0 0 3px rgba(252,129,129,0.15) !important; }
+}
+
+.error-msg { font-size: 11px; color: #e53e3e; }
+
+.reclamo-footer {
+  padding: 24px 32px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) { padding: 20px; flex-direction: column; align-items: flex-start; }
+}
+
+.reclamo-aviso {
+  font-size: 12px;
+  color: #888;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.btn-reclamo {
+  @include m.btn-pill(v.$yellow, v.$black, v.$yellow);
+  padding: 13px 28px;
+  font-size: 15px;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) { background: v.$yellow-dark; border-color: v.$yellow-dark; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.spinner-sm {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: v.$black;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+// ── Success ───────────────────────────────────────────────────
+.reclamo-success {
+  background: v.$white;
+  border: 1px solid #eee;
+  border-radius: v.$radius-lg;
+  padding: 60px 40px;
+  text-align: center;
+
+  &__icon { font-size: 60px; margin-bottom: 18px; }
+  h2 { font-size: 22px; font-weight: 800; color: v.$black; margin-bottom: 10px; }
+  p  { font-size: 14px; color: #666; margin-bottom: 18px; line-height: 1.6; }
+
+  &__nro {
+    display: inline-block;
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    color: #276749;
+    border-radius: v.$radius-sm;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-bottom: 18px;
+
+    strong { font-size: 16px; }
+  }
+
+  &__info { font-size: 13px; color: #888; max-width: 480px; margin: 0 auto 28px; }
+}
+
+.btn-nuevo {
+  @include m.btn-pill(v.$black, v.$white);
+  &:hover { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+}
