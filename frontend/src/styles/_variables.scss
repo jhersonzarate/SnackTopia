@@ -17,6 +17,7 @@ $fw-bold:      700;
 $fw-extrabold: 800;
 
 // ── Breakpoints ───────────────────────────────────────────────
+$bp-xs:  375px;
 $bp-sm:  640px;
 $bp-md:  768px;
 $bp-lg:  1024px;
@@ -35,3 +36,10 @@ $shadow-panel: -2px 0 8px rgba(0,0,0,0.15);
 
 // ── Transición base ───────────────────────────────────────────
 $transition: all 0.25s ease;
+
+// ── Spacing responsive ────────────────────────────────────────
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 40px;
+$spacing-xl: 60px;

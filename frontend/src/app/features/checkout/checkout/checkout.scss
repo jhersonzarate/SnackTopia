@@ -4,9 +4,10 @@
 .checkout-wrapper {
   display: flex;
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: stretch;
 
-  @media (max-width: 900px) {
+  @include m.max-lg {
     flex-direction: column;
   }
 }
@@ -15,32 +16,33 @@
 .checkout-left {
   flex: 1;
   background: v.$white;
-  padding: 0;
   display: flex;
   flex-direction: column;
 }
 
 .checkout-header {
-  padding: 24px 40px;
+  padding: 20px 40px;
   border-bottom: 1px solid #eee;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 
-  @media (max-width: 600px) { padding: 20px 20px; }
+  @include m.max-md { padding: 16px 20px; }
+  @include m.max-sm { padding: 14px 16px; }
 }
 
 .checkout-logo img {
-  height: 44px;
+  height: 40px;
   object-fit: contain;
 }
 
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
   color: #aaa;
+  flex-wrap: wrap;
 
   &__link { color: #888; &:hover { color: v.$black; text-decoration: underline; } }
   &__sep  { color: #ddd; }
@@ -50,10 +52,11 @@
 
 .checkout-form-wrap,
 .checkout-payment {
-  padding: 36px 40px 48px;
-  max-width: 600px;
+  padding: 28px 40px 40px;
+  max-width: 580px;
 
-  @media (max-width: 600px) { padding: 24px 20px 40px; }
+  @include m.max-md { padding: 20px 20px 32px; max-width: 100%; }
+  @include m.max-sm { padding: 16px 16px 28px; }
 }
 
 .checkout-user-info {
@@ -63,12 +66,12 @@
   background: #f9f9f9;
   border: 1px solid #eee;
   border-radius: v.$radius-md;
-  padding: 12px 16px;
-  margin-bottom: 28px;
+  padding: 12px 14px;
+  margin-bottom: 24px;
 
   &__avatar {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     background: v.$yellow;
     color: v.$black;
     border-radius: 50%;
@@ -76,36 +79,42 @@
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 16px;
+    font-size: 15px;
     flex-shrink: 0;
   }
 
-  &__name  { font-weight: 700; font-size: 14px; color: v.$black; }
+  &__name  { font-weight: 700; font-size: 13px; color: v.$black; }
   &__email { font-size: 12px; color: #888; }
 }
 
 .checkout-section-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   color: v.$black;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 14px;
 
-  label { font-size: 13px; font-weight: 600; color: v.$text-primary; }
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: v.$text-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 }
 
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 
-  @media (max-width: 500px) { grid-template-columns: 1fr; }
+  @include m.max-sm { grid-template-columns: 1fr; }
 }
 
 .input-snack {
@@ -123,9 +132,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 24px;
+  margin-top: 20px;
   flex-wrap: wrap;
   gap: 12px;
+
+  @include m.max-sm {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 }
 
 .btn-back-link {
@@ -137,15 +151,22 @@
   font-family: v.$font-primary;
   transition: v.$transition;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+
   &:hover { color: v.$black; }
 }
 
 .btn-checkout-primary {
   @include m.btn-pill(#272727, v.$white);
-  padding: 14px 28px;
-  font-size: 15px;
+  padding: 13px 26px;
+  font-size: 14px;
   &:hover:not(:disabled) { background: v.$black; }
   &:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  @include m.max-sm { width: 100%; justify-content: center; }
 }
 
 .spinner-sm {
@@ -163,84 +184,97 @@
   border: 1px solid #eee;
   border-radius: v.$radius-md;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .payment-row {
   display: flex;
-  gap: 16px;
-  padding: 12px 16px;
+  gap: 14px;
+  padding: 12px 14px;
   border-bottom: 1px solid #f5f5f5;
-  font-size: 14px;
+  font-size: 13px;
 
   &:last-child { border-bottom: none; }
 }
 
-.payment-label { font-weight: 600; color: #aaa; min-width: 90px; }
-.payment-value { color: v.$text-primary; }
+.payment-label { font-weight: 600; color: #aaa; min-width: 80px; font-size: 12px; }
+.payment-value { color: v.$text-primary; font-size: 13px; }
 
 .payment-method {
-  margin-bottom: 24px;
-  h3 { font-size: 14px; font-weight: 700; color: v.$black; margin-bottom: 12px; }
+  margin-bottom: 20px;
+  h3 { font-size: 13px; font-weight: 700; color: v.$black; margin-bottom: 10px; }
 
   &__item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 14px 16px;
+    padding: 12px 14px;
     border: 2px solid #eee;
     border-radius: v.$radius-md;
-    transition: v.$transition;
 
     &--active { border-color: v.$yellow; background: #fffde7; }
   }
 
-  &__icon { font-size: 24px; }
-  &__name { font-weight: 700; font-size: 14px; color: v.$black; }
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 24px; height: 24px; }
+  }
+
+  &__name { font-weight: 700; font-size: 13px; color: v.$black; }
   &__desc { font-size: 12px; color: #888; }
-  &__check { margin-left: auto; font-size: 16px; color: #38a169; font-weight: 800; }
+  &__check { margin-left: auto; color: #38a169; font-weight: 800; }
 }
 
 // ── Right panel ───────────────────────────────────────────────
 .checkout-right {
-  width: 420px;
+  width: 400px;
   background: #f8f9fa;
   border-left: 1px solid #eee;
-  padding: 40px 36px;
+  padding: 36px 28px;
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 900px) {
+  @include m.max-lg {
     width: 100%;
     border-left: none;
     border-top: 2px solid #eee;
-    padding: 28px 20px;
+    padding: 24px 20px;
   }
+
+  @include m.max-sm { padding: 20px 16px; }
 }
 
 .checkout-right__titulo {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   color: v.$black;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .checkout-items {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  /* En móvil, horizontalmente scrollable si hay muchos items */
+  @include m.max-sm {
+    max-height: 240px;
+    overflow-y: auto;
+  }
 }
 
 .checkout-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 
   &__img {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     background: v.$white;
     border-radius: v.$radius-md;
     border: 1px solid #eee;
@@ -257,14 +291,14 @@
 
   &__qty {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: -7px;
+    right: -7px;
     background: #6c757d;
     color: v.$white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 11px;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -272,29 +306,29 @@
   }
 
   &__info { flex: 1; min-width: 0; }
-  &__nombre { font-size: 12px; color: #555; line-height: 1.3; }
-  &__precio { font-size: 12px; color: #aaa; margin-top: 2px; }
+  &__nombre { font-size: 11px; color: #555; line-height: 1.3; @include m.text-clamp(2); }
+  &__precio { font-size: 11px; color: #aaa; margin-top: 2px; }
   &__total  { font-size: 13px; font-weight: 700; color: v.$black; flex-shrink: 0; }
 }
 
 .checkout-totales {
   border-top: 1px solid #e0e0e0;
-  padding-top: 16px;
+  padding-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .totales-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
 
   &--total {
-    font-size: 18px;
+    font-size: 17px;
     color: v.$black;
-    padding-top: 10px;
+    padding-top: 9px;
     border-top: 1px solid #ddd;
     margin-top: 4px;
   }
@@ -303,7 +337,7 @@
 .totales-gratis {
   color: #38a169;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .alert-error {
@@ -313,5 +347,5 @@
   border-radius: v.$radius-sm;
   padding: 10px 14px;
   font-size: 13px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }

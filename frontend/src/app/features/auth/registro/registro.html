@@ -47,7 +47,7 @@
             placeholder="Mínimo 6 caracteres"
             class="input-snack" [class.input-error]="ctrl('password').invalid && ctrl('password').touched" />
           <button type="button" class="pass-toggle" (click)="mostrarPass.set(!mostrarPass())">
-            {{ mostrarPass() ? '🙈' : '👁️' }}
+            <i class="fa-regular" [class.fa-eye]="!mostrarPass()" [class.fa-eye-slash]="mostrarPass()"></i>
           </button>
         </div>
         @if (ctrl('password').invalid && ctrl('password').touched) {

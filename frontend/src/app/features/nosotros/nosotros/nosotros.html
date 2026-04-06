@@ -7,9 +7,14 @@
         En Snacktopia nos apasiona llevar hasta ti los mejores snacks del mercado, con calidad y precios accesibles.
         Nuestra misión es ofrecer una experiencia divertida y deliciosa para todos los amantes de los snacks.
       </p>
-      <a routerLink="/productos" class="btn-nosotros">Ver nuestros productos →</a>
+      <a routerLink="/productos" class="btn-nosotros">Ver nuestros productos <i class="fa-solid fa-arrow-right icon-inline"></i></a>
     </div>
-    <div class="nosotros-hero__emojis">🍟🍪🍫🥨🍬</div>
+    <div class="nosotros-hero__icons">
+      <i class="fa-solid fa-cookie-bite icon-inline"></i>
+      <i class="fa-solid fa-gift icon-inline"></i>
+      <i class="fa-solid fa-bag-shopping icon-inline"></i>
+      <i class="fa-solid fa-star icon-inline"></i>
+    </div>
   </div>
 </section>
 
@@ -20,7 +25,7 @@
     <div class="valores-grid">
       @for (v of valores; track v.titulo) {
         <div class="valor-card">
-          <div class="valor-card__icon">{{ v.icon }}</div>
+          <div class="valor-card__icon"><i [class]="v.iconClass + ' icon-inline'"></i></div>
           <h3 class="valor-card__titulo">{{ v.titulo }}</h3>
           <p class="valor-card__desc">{{ v.desc }}</p>
         </div>
@@ -72,7 +77,7 @@
     <div class="equipo-grid">
       @for (m of equipo; track m.nombre) {
         <div class="equipo-card">
-          <div class="equipo-card__avatar">{{ m.emoji }}</div>
+          <div class="equipo-card__avatar"><i [class]="m.iconClass + ' icon-inline'"></i></div>
           <h3 class="equipo-card__nombre">{{ m.nombre }}</h3>
           <p class="equipo-card__rol">{{ m.rol }}</p>
         </div>

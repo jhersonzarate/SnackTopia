@@ -6,10 +6,25 @@
         Bienvenido a<br>
         <span class="hero__marca">Snacktopia</span>
       </h1>
-      <p class="hero__subtitulo">Explora los snacks más deliciosos y divertidos. ¡Envío a todo Lima!</p>
+      <p class="hero__subtitulo">Explora los snacks más deliciosos y divertidos. Envío a todo Lima.</p>
       <div class="hero__btns">
-        <button class="btn-hero-primary" (click)="irOfertas()">Ver Ofertas 🔥</button>
-        <button class="btn-hero-outline" (click)="irProductos()">Explorar Snacks</button>
+        <button class="btn-hero-primary" (click)="irOfertas()">
+          <!-- Lucide: Tag -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2H2v10l9.29 9.29a1 1 0 0 0 1.41 0l7.29-7.29a1 1 0 0 0 0-1.41z"/>
+            <path d="M7 7h.01"/>
+          </svg>
+          Ver Ofertas
+        </button>
+        <button class="btn-hero-outline" (click)="irProductos()">
+          <!-- Lucide: ShoppingBag -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          Explorar Snacks
+        </button>
       </div>
     </div>
     <div class="hero__img-wrap">
@@ -22,20 +37,60 @@
 <section class="categorias">
   <div class="container">
     <div class="categorias__grid">
+      <!-- Snacks Salados -->
       <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'snacks-salados'}})">
-        <span class="cat-item__icon">🥨</span>
+        <span class="cat-item__icon">
+          <!-- Icono: Chips / Snack -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
+            <path d="M8 12s1.5-3 4-3 4 3 4 3"/>
+            <path d="M9 9h.01M15 9h.01"/>
+          </svg>
+        </span>
         <span>Snacks Salados</span>
       </div>
+
+      <!-- Galletas -->
       <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'galletas'}})">
-        <span class="cat-item__icon">🍪</span>
+        <span class="cat-item__icon">
+          <!-- Lucide: Cookie -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+            <path d="M8.5 8.5v.01"/>
+            <path d="M16 15.5v.01"/>
+            <path d="M12 12v.01"/>
+            <path d="M11 17v.01"/>
+            <path d="M7 14v.01"/>
+          </svg>
+        </span>
         <span>Galletas</span>
       </div>
+
+      <!-- Dulces -->
       <div class="cat-item" (click)="router.navigate(['/productos'], {queryParams:{categoria:'dulces'}})">
-        <span class="cat-item__icon">🍬</span>
+        <span class="cat-item__icon">
+          <!-- Lucide: Candy -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9.5 7.5-2 2a4.95 4.95 0 1 0 7 7l2-2a4.95 4.95 0 1 0-7-7Z"/>
+            <path d="M14 6.5v10"/>
+            <path d="M10 7.5v10"/>
+            <path d="m16 7 1-5 1.37.68A3 3 0 0 0 19.7 3H21v1.3a3 3 0 0 0 .32 1.33L22 7l-5 1Z"/>
+            <path d="m8 17-1 5-1.37-.68A3 3 0 0 0 4.3 21H3v-1.3a3 3 0 0 0-.32-1.33L2 17l5-1Z"/>
+          </svg>
+        </span>
         <span>Dulces</span>
       </div>
+
+      <!-- Ofertas -->
       <div class="cat-item cat-item--yellow" (click)="irOfertas()">
-        <span class="cat-item__icon">🏷️</span>
+        <span class="cat-item__icon">
+          <!-- Lucide: Percent -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="5" x2="5" y2="19"/>
+            <circle cx="6.5" cy="6.5" r="2.5"/>
+            <circle cx="17.5" cy="17.5" r="2.5"/>
+          </svg>
+        </span>
         <span>Ofertas</span>
       </div>
     </div>
@@ -47,7 +102,13 @@
   <div class="container">
     <div class="section-header">
       <h2 class="section-titulo">Productos Destacados</h2>
-      <button class="btn-ver-todos" (click)="irProductos()">Ver todos →</button>
+      <button class="btn-ver-todos" (click)="irProductos()">
+        Ver todos
+        <!-- Lucide: ArrowRight -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </button>
     </div>
     <div class="productos-grid">
       @for (p of destacados; track p.id) {
@@ -65,10 +126,27 @@
 <section class="promo-banner">
   <div class="container promo-banner__inner">
     <div class="promo-banner__texto">
-      <h2>¡Combos y Packs con hasta 20% de descuento!</h2>
+      <h2>Combos y Packs con hasta 20% de descuento</h2>
       <p>Aprovecha nuestras ofertas especiales en packs de tus snacks favoritos.</p>
-      <button class="btn-promo" (click)="irOfertas()">Ver Ofertas</button>
+      <button class="btn-promo" (click)="irOfertas()">
+        <!-- Lucide: Sparkles -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          <path d="M20 3v4"/><path d="M22 5h-4"/>
+          <path d="M4 17v2"/><path d="M5 18H3"/>
+        </svg>
+        Ver Ofertas
+      </button>
     </div>
-    <div class="promo-banner__emoji">🎉🍟🍪🍫🎉</div>
+    <div class="promo-banner__icon">
+      <!-- Icono decorativo: bolsa de compras -->
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="25" width="60" height="45" rx="6" stroke="currentColor" stroke-width="3" fill="none"/>
+        <path d="M27 25c0-7.18 5.82-13 13-13s13 5.82 13 13" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M32 43h16M32 51h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="37" r="2.5" fill="currentColor"/>
+        <circle cx="48" cy="37" r="2.5" fill="currentColor"/>
+      </svg>
+    </div>
   </div>
 </section>

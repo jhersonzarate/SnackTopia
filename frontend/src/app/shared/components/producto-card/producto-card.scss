@@ -13,15 +13,21 @@
   height: 100%;
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: v.$shadow-hover;
     border-color: #e8e8e8;
+  }
+
+  // En móvil, sin transform para mejor rendimiento
+  @include m.max-sm {
+    &:hover { transform: none; box-shadow: v.$shadow-card; }
+    &:active { transform: scale(0.99); }
   }
 
   // ── Imagen ──────────────────────────────────────────────────
   &__img-wrap {
     position: relative;
-    height: 200px;
+    height: 180px;
     background: #f9f9f9;
     cursor: pointer;
     display: flex;
@@ -29,22 +35,26 @@
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
+
+    @include m.max-sm { height: 150px; }
   }
 
   &__img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 12px;
+    padding: 10px;
     transition: transform 0.4s ease;
 
-    .pcard:hover & { transform: scale(1.06); }
+    .pcard:hover & {
+      @media (min-width: 640px) { transform: scale(1.06); }
+    }
   }
 
   &__badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     background: v.$yellow;
     color: v.$black;
     font-size: 11px;
@@ -56,27 +66,32 @@
 
   // ── Body ────────────────────────────────────────────────────
   &__body {
-    padding: 12px 14px 14px;
+    padding: 12px 12px 14px;
     display: flex;
     flex-direction: column;
     flex: 1;
     gap: 6px;
+
+    @include m.max-sm { padding: 10px 10px 12px; }
   }
 
   &__precios {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   &__precio-final {
     font-weight: 700;
     font-size: 15px;
     color: v.$black;
+
+    @include m.max-sm { font-size: 14px; }
   }
 
   &__precio-original {
-    font-size: 12px;
+    font-size: 11px;
     color: #bbb;
     text-decoration: line-through;
   }
@@ -87,14 +102,13 @@
     color: #444;
     cursor: pointer;
     flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    @include m.text-clamp(3);
     transition: v.$transition;
     margin: 0;
 
     &:hover { color: v.$black; }
+
+    @include m.max-sm { font-size: 12px; }
   }
 
   // ── Footer ──────────────────────────────────────────────────
@@ -117,23 +131,31 @@
     cursor: pointer;
     transition: v.$transition;
     font-family: v.$font-primary;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 
     &:hover { background: v.$yellow; color: v.$black; border-color: v.$yellow; }
+    &:active { transform: scale(0.99); }
+
+    @include m.max-sm { font-size: 12px; padding: 9px 0; }
   }
 
   &__stars {
     display: flex;
     align-items: center;
     gap: 2px;
-    font-size: 14px;
+    font-size: 13px;
     color: #ddd;
 
     span.filled { color: v.$black; }
 
     small {
-      font-size: 11px;
+      font-size: 10px;
       color: #aaa;
-      margin-left: 4px;
+      margin-left: 3px;
     }
   }
 }

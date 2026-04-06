@@ -8,28 +8,28 @@
 
       <div class="info-items">
         <div class="info-item">
-          <span class="info-item__icon">📧</span>
+          <span class="info-item__icon"><i class="fa-regular fa-envelope icon-inline"></i></span>
           <div>
             <p class="info-item__label">Correo</p>
             <p class="info-item__valor">info&#64;snacktopia.pe</p>
           </div>
         </div>
         <div class="info-item">
-          <span class="info-item__icon">📞</span>
+          <span class="info-item__icon"><i class="fa-solid fa-phone icon-inline"></i></span>
           <div>
             <p class="info-item__label">WhatsApp</p>
             <p class="info-item__valor">+51 999 888 777</p>
           </div>
         </div>
         <div class="info-item">
-          <span class="info-item__icon">📍</span>
+          <span class="info-item__icon"><i class="fa-solid fa-location-dot icon-inline"></i></span>
           <div>
             <p class="info-item__label">Ubicación</p>
             <p class="info-item__valor">Lima, Perú</p>
           </div>
         </div>
         <div class="info-item">
-          <span class="info-item__icon">⏰</span>
+          <span class="info-item__icon"><i class="fa-regular fa-clock icon-inline"></i></span>
           <div>
             <p class="info-item__label">Horario de atención</p>
             <p class="info-item__valor">Lun – Sáb: 9am – 6pm</p>
@@ -51,7 +51,7 @@
     <div class="contacto-form-wrap">
       @if (enviado()) {
         <div class="contacto-success fade-in-up">
-          <div class="contacto-success__icon">✅</div>
+          <div class="contacto-success__icon"><i class="fa-solid fa-circle-check icon-inline"></i></div>
           <h3>¡Mensaje enviado!</h3>
           <p>Gracias por contactarnos. Te responderemos dentro de las próximas 24 horas.</p>
           <button class="btn-otro" (click)="enviado.set(false)">Enviar otro mensaje</button>

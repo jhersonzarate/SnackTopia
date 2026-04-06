@@ -28,14 +28,15 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 18px 20px;
-  font-size: 15px;
+  padding: 16px 18px;
+  font-size: 14px;
   font-weight: 700;
   color: v.$text-primary;
   text-decoration: none;
   position: relative;
   transition: v.$transition;
   white-space: nowrap;
+  min-height: 52px;
 
   &::after {
     content: '';
@@ -55,19 +56,24 @@
     &::after { width: 70%; }
   }
 
+  svg {
+    transition: v.$transition;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
   &--highlight {
     background: v.$yellow;
     color: v.$black;
-    padding: 18px 36px;
-    font-size: 17px;
+    padding: 16px 28px;
+    font-size: 15px;
     font-weight: 800;
 
     &::after { display: none; }
     &:hover { background: v.$black; color: v.$yellow; }
     &.active { background: v.$black; color: v.$yellow; }
   }
-
-  svg { transition: v.$transition; }
 }
 
 // ── Submenú ───────────────────────────────────────────────────
@@ -93,14 +99,19 @@
   &__grid {
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 48px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
+
+    @include m.max-lg {
+      gap: 28px;
+      padding: 0 24px;
+    }
   }
 
   &__col {
-    min-width: 160px;
+    min-width: 140px;
 
     ul {
       list-style: none;
@@ -113,21 +124,25 @@
   }
 
   &__title {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     color: v.$black;
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     padding-bottom: 8px;
     border-bottom: 2px solid v.$yellow;
   }
 
   &__link {
-    font-size: 14px;
+    font-size: 13px;
     color: #555;
     transition: v.$transition;
     display: block;
+    padding: 4px 0;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
 
     &:hover { color: v.$black; padding-left: 6px; }
   }
@@ -143,7 +158,9 @@
   border: none;
   cursor: pointer;
   padding: 14px;
-  margin-right: 8px;
+  margin-right: 4px;
+  min-height: 52px;
+  min-width: 44px;
 
   span {
     display: block;
@@ -167,10 +184,11 @@
   inset: 0;
   background: rgba(0,0,0,0.4);
   z-index: 850;
+  backdrop-filter: blur(2px);
 }
 
-// ── Responsive ────────────────────────────────────────────────
-@media (max-width: 768px) {
+// ── Responsive: Tablet y Móvil ───────────────────────────────
+@media (max-width: 860px) {
   .hamburger { display: flex; }
   .nav-overlay { display: block; }
 
@@ -178,42 +196,66 @@
     position: fixed;
     top: 0;
     left: -100%;
-    width: 280px;
+    width: min(300px, 85vw);
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
     background: v.$white;
     flex-direction: column;
     align-items: flex-start;
-    padding: 80px 0 24px;
+    padding: 80px 0 max(env(safe-area-inset-bottom), 24px);
     box-shadow: 4px 0 20px rgba(0,0,0,0.15);
     transition: left 0.3s ease;
     z-index: 900;
     overflow-y: auto;
+    overscroll-behavior: contain;
 
     &.open { left: 0; }
   }
 
   .nav-link {
     width: 100%;
-    padding: 14px 24px;
+    padding: 15px 24px;
     font-size: 15px;
+    min-height: 52px;
+    border-bottom: 1px solid #f5f5f5;
 
     &::after { display: none; }
-    &--highlight { background: none; padding: 14px 24px; font-size: 15px; font-weight: 800; }
+
+    &--highlight {
+      background: v.$yellow;
+      color: v.$black;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 800;
+      border-bottom: none;
+    }
   }
 
-  .has-submenu:hover .submenu { display: none; }
+  /* En móvil el submenú se expande verticalmente */
+  .has-submenu {
+    flex-direction: column;
+    width: 100%;
+
+    &:hover .submenu { display: none; }
+  }
 
   .submenu {
     position: static;
     display: none !important;
     box-shadow: none;
     border: none;
-    padding: 0 24px;
+    padding: 0 24px 16px;
 
     &__grid {
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       padding: 0;
+    }
+
+    &__link {
+      font-size: 14px;
+      padding: 6px 0;
+      min-height: 40px;
     }
   }
 }

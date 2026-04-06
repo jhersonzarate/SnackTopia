@@ -37,7 +37,7 @@
       @if (marcaActiva()) {
         <div class="filtros__activo">
           <span>Filtrando: <strong>{{ marcaActiva() }}</strong></span>
-          <button class="btn-limpiar" (click)="limpiarFiltros()">✕ Limpiar</button>
+          <button class="btn-limpiar" (click)="limpiarFiltros()"><i class="fa-solid fa-xmark icon-inline"></i> Limpiar</button>
         </div>
       }
     </aside>
@@ -52,7 +52,7 @@
 
       @if (sinResultados()) {
         <div class="sin-resultados">
-          <span class="sin-resultados__emoji">🔍</span>
+          <span class="sin-resultados__emoji"><i class="fa-solid fa-magnifying-glass icon-inline"></i></span>
           <h3>No encontramos productos</h3>
           <p>Intenta con otro término o limpia los filtros.</p>
           <button class="btn-limpiar-grande" (click)="limpiarFiltros()">Limpiar filtros</button>

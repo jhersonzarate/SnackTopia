@@ -79,7 +79,7 @@
           </div>
 
           <div class="checkout-actions">
-            <a routerLink="/" class="btn-back-link">← Volver a la tienda</a>
+            <a routerLink="/" class="btn-back-link"><i class="fa-solid fa-arrow-left icon-inline"></i> Volver a la tienda</a>
             <button type="submit" class="btn-checkout-primary">
               Continuar con el pago
             </button>
@@ -113,12 +113,12 @@
         <div class="payment-method">
           <h3>Método de pago</h3>
           <div class="payment-method__item payment-method__item--active">
-            <span class="payment-method__icon">💳</span>
+            <span class="payment-method__icon"><i class="fa-regular fa-credit-card icon-inline"></i></span>
             <div>
               <p class="payment-method__name">Pago contra entrega</p>
               <p class="payment-method__desc">Paga en efectivo cuando recibas tu pedido</p>
             </div>
-            <span class="payment-method__check">✓</span>
+            <span class="payment-method__check"><i class="fa-solid fa-check icon-inline"></i></span>
           </div>
         </div>
 
@@ -127,7 +127,7 @@
         }
 
         <div class="checkout-actions">
-          <button type="button" class="btn-back-link" (click)="volverInfo()">← Volver a información</button>
+          <button type="button" class="btn-back-link" (click)="volverInfo()"><i class="fa-solid fa-arrow-left icon-inline"></i> Volver a información</button>
           <button type="button" class="btn-checkout-primary" (click)="procesarPago()" [disabled]="cargando()">
             @if (cargando()) {
               <span class="spinner-sm"></span> Procesando...

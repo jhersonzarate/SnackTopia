@@ -1,10 +1,15 @@
 @use 'variables' as v;
 
-// ── Responsive ────────────────────────────────────────────────
-@mixin sm  { @media (min-width: v.$bp-sm)  { @content; } }
-@mixin md  { @media (min-width: v.$bp-md)  { @content; } }
-@mixin lg  { @media (min-width: v.$bp-lg)  { @content; } }
-@mixin xl  { @media (min-width: v.$bp-xl)  { @content; } }
+// ── Responsive Mixins ─────────────────────────────────────────
+@mixin xs  { @media (max-width: #{v.$bp-xs})  { @content; } }
+@mixin sm  { @media (min-width: #{v.$bp-sm})  { @content; } }
+@mixin md  { @media (min-width: #{v.$bp-md})  { @content; } }
+@mixin lg  { @media (min-width: #{v.$bp-lg})  { @content; } }
+@mixin xl  { @media (min-width: #{v.$bp-xl})  { @content; } }
+
+@mixin max-sm { @media (max-width: #{v.$bp-sm})  { @content; } }
+@mixin max-md { @media (max-width: #{v.$bp-md})  { @content; } }
+@mixin max-lg { @media (max-width: #{v.$bp-lg})  { @content; } }
 
 // ── Flex helpers ──────────────────────────────────────────────
 @mixin flex-center {
@@ -17,6 +22,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Grid responsive ───────────────────────────────────────────
+@mixin grid-auto($min: 220px, $gap: 20px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: $gap;
 }
 
 // ── Botón pill base ───────────────────────────────────────────
@@ -36,6 +53,13 @@
   transition: v.$transition;
   white-space: nowrap;
   font-family: v.$font-primary;
+  text-decoration: none;
+  line-height: 1.4;
+
+  @include max-sm {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
 }
 
 // ── Truncar texto ─────────────────────────────────────────────
@@ -66,6 +90,8 @@
   outline: none;
   transition: v.$transition;
   background: v.$white;
+  -webkit-appearance: none;
+  appearance: none;
 
   &:focus {
     border-color: v.$yellow;
@@ -73,6 +99,11 @@
   }
 
   &::placeholder { color: #bbb; }
+
+  @include max-sm {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
 }
 
 // ── Título de sección ─────────────────────────────────────────
@@ -93,4 +124,18 @@
     border-radius: 2px;
     margin: 10px auto 0;
   }
+}
+
+// ── Safe area para dispositivos móviles ──────────────────────
+@mixin safe-area-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 16px);
+}
+
+// ── Touch target mínimo ───────────────────────────────────────
+@mixin touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

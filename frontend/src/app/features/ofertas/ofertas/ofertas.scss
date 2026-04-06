@@ -43,3 +43,23 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 22px;
 }
+
+@media (max-width: 640px) {
+  .ofertas-hero {
+    padding: 34px 0 28px;
+
+    &__inner {
+      justify-content: flex-start;
+    }
+
+    &__badge {
+      font-size: 18px;
+      padding: 10px 16px;
+    }
+  }
+
+  .container {
+    padding-top: 28px;
+    padding-bottom: 44px;
+  }
+}

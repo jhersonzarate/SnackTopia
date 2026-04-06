@@ -4,36 +4,51 @@
 .footer {
   background: #111;
   color: #ccc;
-  padding: 50px 0 0;
+  padding: 48px 0 0;
   font-family: v.$font-primary;
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 36px;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: 32px;
     padding-bottom: 40px;
+
+    @include m.max-lg {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @include m.max-sm {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 
   &__col {
-    &--brand { max-width: 240px; }
+    &--brand { max-width: 240px; @include m.max-sm { max-width: 100%; } }
     &--reclamo {
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      @include m.max-lg { grid-column: span 2; flex-direction: row; align-items: flex-start; gap: 24px; }
+      @include m.max-sm { grid-column: span 1; flex-direction: column; }
     }
   }
 
   &__logo {
-    height: 52px;
+    height: 48px;
     object-fit: contain;
     margin-bottom: 12px;
     filter: brightness(0) invert(1);
+
+    @include m.max-sm { height: 40px; }
   }
 
   &__tagline {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 1px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.4);
     margin-bottom: 8px;
     text-transform: uppercase;
   }
@@ -47,15 +62,16 @@
   &__social {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
   }
 
   &__col-title {
     color: v.$yellow;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255,204,0,0.3);
   }
@@ -66,21 +82,37 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+
+    // En móvil, grid para 2 columnas en listas largas
+    @include m.max-sm {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+    }
 
     a {
       font-size: 13px;
       color: #aaa;
       transition: v.$transition;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
 
-      &:hover { color: v.$yellow; padding-left: 4px; }
+      svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
+
+      &:hover { color: v.$yellow; }
     }
   }
 
   &__reclamo-img {
-    width: 130px;
+    width: 110px;
     height: auto;
     transition: v.$transition;
+    flex-shrink: 0;
+
+    @include m.max-sm { width: 90px; }
 
     &:hover { transform: scale(1.05); }
   }
@@ -89,14 +121,20 @@
     p {
       font-size: 13px;
       color: #aaa;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      svg { width: 14px; height: 14px; flex-shrink: 0; color: v.$yellow; }
     }
   }
 
   &__bottom {
     border-top: 1px solid #222;
-    padding: 16px 0;
+    padding: 14px 0;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
     text-align: center;
 
     p {
@@ -107,8 +145,8 @@
 }
 
 .social-btn {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: rgba(255,255,255,0.08);
   display: flex;
@@ -116,6 +154,8 @@
   justify-content: center;
   color: #ccc;
   transition: v.$transition;
+
+  svg { width: 18px; height: 18px; }
 
   &:hover {
     background: v.$yellow;

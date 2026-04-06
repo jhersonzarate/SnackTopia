@@ -18,7 +18,7 @@ export class ChatbotComponent implements AfterViewChecked {
   mensajes = signal<Mensaje[]>([]);
   inputTexto = '';
 
-  readonly menu = `Hola 👋, soy el bot de Snacktopia 🍫. ¿En qué puedo ayudarte?\n\n1. Productos más vendidos\n2. ¿Dónde comprar?\n3. Promociones vigentes\n4. Contacto o ayuda\n5. Salir`;
+  readonly menu = `Hola, soy el asistente de Snacktopia. ¿En qué puedo ayudarte?\n\n1. Productos más vendidos\n2. ¿Dónde comprar?\n3. Promociones vigentes\n4. Contacto o ayuda\n5. Salir`;
 
   constructor() {
     this.mensajes.set([{ rol: 'bot', texto: this.menu }]);
@@ -46,12 +46,12 @@ export class ChatbotComponent implements AfterViewChecked {
 
   private responder(input: string): string {
     switch (input.trim()) {
-      case '1': return 'Nuestros más vendidos:\n🥇 Papas Inka Chips BBQ\n🥈 Cheetos Queso Picante\n🥉 Galletas Casino Fresa';
-      case '2': return '¡Nos encuentras aquí mismo! También en WhatsApp: +51 999 888 777 📦';
-      case '3': return '🎉 Oferta: Packs de Cheetos con 10% de descuento. ¡Hasta agotar stock!';
-      case '4': return '📧 info@snacktopia.pe\n📞 +51 999 888 777\n⏰ Lun–Sáb 9am–6pm';
-      case '5': return '¡Hasta pronto! 👋 Gracias por visitar Snacktopia.';
-      default:  return 'Escribe un número del 1 al 5 para recibir información. 😊';
+      case '1': return 'Nuestros más vendidos:\n1) Papas Inka Chips BBQ\n2) Cheetos Queso Picante\n3) Galletas Casino Fresa';
+      case '2': return 'Nos encuentras aquí mismo. También en WhatsApp: +51 999 888 777.';
+      case '3': return 'Oferta vigente: Packs de Cheetos con 10% de descuento hasta agotar stock.';
+      case '4': return 'Correo: info@snacktopia.pe\nTeléfono: +51 999 888 777\nHorario: Lun-Sáb 9am-6pm';
+      case '5': return 'Hasta pronto. Gracias por visitar Snacktopia.';
+      default:  return 'Escribe un número del 1 al 5 para recibir información.';
     }
   }
 }

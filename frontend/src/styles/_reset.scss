@@ -9,6 +9,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Prevenir scroll horizontal en móvil */
+  overflow-x: hidden;
 }
 
 body {
@@ -18,11 +21,16 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Safe area para notch y barra inferior */
+  padding-top: env(safe-area-inset-top);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  /* Mejorar tap en móvil */
+  -webkit-tap-highlight-color: transparent;
 }
 
 img, svg {
@@ -33,14 +41,36 @@ img, svg {
 button {
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
+  /* Quitar highlight azul en iOS */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 ul, ol { list-style: none; }
 
 input, textarea, select {
   font-family: 'Poppins', sans-serif;
+  /* Evitar zoom en iOS al hacer focus */
+  font-size: 16px;
+}
+
+/* En desktop podemos reducir */
+@media (min-width: 768px) {
+  input, textarea, select {
+    font-size: 15px;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
+}
+
+/* Mejorar tap targets */
+button, a, [role="button"] {
+  min-height: 44px;
+}
+
+/* Prevenir overflow de imágenes */
+img {
+  height: auto;
 }

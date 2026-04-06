@@ -1,10 +1,10 @@
 <div class="chatbot-box fade-in">
   <div class="chatbot-header">
     <div class="chatbot-header__info">
-      <div class="chatbot-avatar">🍫</div>
+      <div class="chatbot-avatar"><i class="fa-solid fa-comments icon-inline"></i></div>
       <div>
         <p class="chatbot-name">Bot Snacks</p>
-        <p class="chatbot-status">● En línea</p>
+        <p class="chatbot-status"><i class="fa-solid fa-circle icon-inline"></i> En linea</p>
       </div>
     </div>
     <button class="chatbot-close" (click)="cerrar.emit()">×</button>
@@ -14,7 +14,7 @@
     @for (msg of mensajes(); track $index) {
       <div class="msg" [class.msg--bot]="msg.rol==='bot'" [class.msg--user]="msg.rol==='user'">
         @if (msg.rol === 'bot') {
-          <div class="msg__avatar">🤖</div>
+          <div class="msg__avatar"><i class="fa-solid fa-robot icon-inline"></i></div>
         }
         <div class="msg__burbuja" [innerHTML]="msg.texto.replace('\n','<br>')"></div>
       </div>

@@ -36,11 +36,12 @@
     margin-bottom: 24px;
   }
 
-  &__emojis {
-    font-size: 48px;
-    letter-spacing: 8px;
+  &__icons {
+    font-size: 40px;
+    display: flex;
+    gap: 14px;
     flex-shrink: 0;
-    @media (max-width: 600px) { font-size: 32px; }
+    @media (max-width: 600px) { font-size: 30px; }
   }
 }
 
