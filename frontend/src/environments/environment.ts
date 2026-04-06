@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://snackstopia-production.up.railway.app/'
+  production: false,
+  apiUrl: 'https://snackstopia-production.up.railway.app/api'
 };
