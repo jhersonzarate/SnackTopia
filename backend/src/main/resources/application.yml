@@ -2,7 +2,7 @@ spring:
   application:
     name: snacktopia-backend
   datasource:
-    url: postgresql://neondb_owner:npg_FZsBA8K6Noqe@ep-twilight-scene-aci85hpj-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    url: ${DATABASE_URL}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
