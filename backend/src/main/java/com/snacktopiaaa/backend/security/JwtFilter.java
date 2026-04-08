@@ -34,8 +34,9 @@ public class JwtFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String requestPath = request.getRequestURI();
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7);
+        if (authHeader != null && authHeader.length() > 7
+                && authHeader.regionMatches(true, 0, "Bearer ", 0, 7)) {
+            String token = authHeader.substring(7).trim();
             log.info("🔐 JWT Token recibido para: {}", requestPath);
 
             try {

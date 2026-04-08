@@ -34,7 +34,8 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    const t = localStorage.getItem(this.TOKEN_KEY);
+    return t ? t.trim() : null;
   }
 
   isLoggedIn(): boolean {
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   private saveSession(res: LoginResponse): void {
-    localStorage.setItem(this.TOKEN_KEY, res.token);
+    localStorage.setItem(this.TOKEN_KEY, res.token.trim());
     const user: Usuario = { id: res.id, nombre: res.nombre, apellidos: res.apellidos, email: res.email, rol: res.rol };
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.usuarioActivo.set(user);

@@ -1,5 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CarritoService } from '../../../core/services/carrito';
@@ -86,10 +87,20 @@ export class CheckoutComponent implements OnInit {
         this.carrito.vaciar();
         this.router.navigate(['/checkout/confirmacion']);
       },
-      error: (e) => {
+      error: (e: HttpErrorResponse) => {
         this.cargando.set(false);
-        this.error.set(e?.error?.message || 'Error al procesar el pedido. Intenta de nuevo.');
         this.paso.set(1);
+        if (e.status === 401) {
+          this.error.set(
+            'Tu sesión no es válida o expiró. Cierra sesión e inicia de nuevo.'
+          );
+          return;
+        }
+        const msg =
+          e.error && typeof e.error === 'object' && 'message' in e.error
+            ? String((e.error as { message: unknown }).message)
+            : '';
+        this.error.set(msg || 'Error al procesar el pedido. Intenta de nuevo.');
       }
     });
   }

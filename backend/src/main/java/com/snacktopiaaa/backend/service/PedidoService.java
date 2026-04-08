@@ -88,9 +88,33 @@ public class PedidoService {
     }
 
     // ── Helpers ───────────────────────────────────────────────────
+    /**
+     * Acepta "S/. 7.00", "7,50", "1.234,56", "1.234.567,89" (miles con . o , y decimales al final).
+     * No usa un único replace: varios puntos (miles) rompían {@code new BigDecimal}.
+     */
     private BigDecimal parsePrecio(String precio) {
-        String limpio = precio.replaceAll("[^\\d.]", "");
-        return new BigDecimal(limpio);
+        if (precio == null || precio.isBlank()) {
+            throw new IllegalArgumentException("Precio vacío");
+        }
+        String s = precio.trim().replaceAll("[^\\d.,]", "");
+        if (s.isEmpty()) {
+            throw new IllegalArgumentException("Precio sin dígitos: " + precio);
+        }
+        int lastDot = s.lastIndexOf('.');
+        int lastComma = s.lastIndexOf(',');
+        int sep = Math.max(lastDot, lastComma);
+        if (sep < 0) {
+            return new BigDecimal(s);
+        }
+        String intPart = s.substring(0, sep).replaceAll("[.,]", "");
+        String fracPart = s.substring(sep + 1).replaceAll("[^\\d]", "");
+        if (intPart.isEmpty()) {
+            intPart = "0";
+        }
+        if (fracPart.isEmpty()) {
+            return new BigDecimal(intPart);
+        }
+        return new BigDecimal(intPart + "." + fracPart);
     }
 
     private PedidoResponse toResponse(Pedido p) {

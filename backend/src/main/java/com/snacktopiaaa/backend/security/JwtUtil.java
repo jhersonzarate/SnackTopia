@@ -21,7 +21,8 @@ public class JwtUtil {
     private long expiration;
 
     private SecretKey getKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        String raw = secret == null ? "" : secret.trim();
+        return Keys.hmacShaKeyFor(raw.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(String email, String rol) {
