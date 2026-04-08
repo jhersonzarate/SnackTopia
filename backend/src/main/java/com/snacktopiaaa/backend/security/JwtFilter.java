@@ -40,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             try {
                 if (jwtUtil.isTokenValid(token)) {
-                    String email = jwtUtil.extractEmail(token);
+                    String email = jwtUtil.extractEmail(token).trim();
                     log.info("✅ Token válido para usuario: {}", email);
                     
                     UserDetails userDetails = userDetailsService.loadUserByUsername(email);

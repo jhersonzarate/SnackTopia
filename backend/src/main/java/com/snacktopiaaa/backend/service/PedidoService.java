@@ -28,7 +28,7 @@ public class PedidoService {
     @Transactional
     public PedidoResponse crearPedido(PedidoRequest req, String emailUsuario) {
 
-        Usuario usuario = usuarioRepository.findByEmail(emailUsuario)
+        Usuario usuario = usuarioRepository.findByEmailIgnoreCase(emailUsuario.trim())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // Calcular subtotal parseando "S/. 7.00" → 7.00
@@ -70,7 +70,7 @@ public class PedidoService {
     // ── Listar pedidos de un usuario ──────────────────────────────
     @Transactional(readOnly = true)
     public List<PedidoResponse> obtenerPedidosPorUsuario(String emailUsuario) {
-        Usuario usuario = usuarioRepository.findByEmail(emailUsuario)
+        Usuario usuario = usuarioRepository.findByEmailIgnoreCase(emailUsuario.trim())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         return pedidoRepository.findByUsuarioId(usuario.getId())

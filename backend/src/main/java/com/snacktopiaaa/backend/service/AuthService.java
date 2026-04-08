@@ -27,7 +27,7 @@ public class AuthService {
 
     // ── Registro ──────────────────────────────────────────────────
     public LoginResponse register(RegisterRequest req) {
-        if (usuarioRepository.existsByEmail(req.getEmail())) {
+        if (usuarioRepository.existsByEmailIgnoreCase(req.getEmail())) {
             throw new IllegalArgumentException("El email ya está registrado");
         }
 
@@ -56,7 +56,7 @@ public class AuthService {
             throw new BadCredentialsException("Email o contraseña incorrectos");
         }
 
-        Usuario usuario = usuarioRepository.findByEmail(req.getEmail())
+        Usuario usuario = usuarioRepository.findByEmailIgnoreCase(req.getEmail().trim())
                 .orElseThrow(() -> new BadCredentialsException("Usuario no encontrado"));
 
         String token = jwtUtil.generateToken(

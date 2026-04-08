@@ -20,7 +20,7 @@ public class UsuarioService {
     // ── Obtener perfil del usuario autenticado ────────────────────
     @Transactional(readOnly = true)
     public Usuario obtenerPorEmail(String email) {
-        return usuarioRepository.findByEmail(email)
+        return usuarioRepository.findByEmailIgnoreCase(email.trim())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + email));
     }
 
